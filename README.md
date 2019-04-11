@@ -1,4 +1,4 @@
-# Hospital System Managment - HSM
+# Sistema de Gestion Hospitalaria - SGH
 Los datos recogidos en las diversas áreas del hospital, cuando relacionados se transforman en instrumentos útiles para la evaluación de la asistencia prestada, cantidad y tipo de recursos involucrados, control de costos generados en la producción de los servicios e índice de solución de los problemas. 
 
 La gestión hospitalaria está vinculada a la alta complejidad, con una infinidad de  reglamentaciones que limita cambios en el sector, costos crecientes y la formación de un paciente cada vez más exigente. En ese escenario, las organizaciones de salud que consiguen desarrollar la habilidad de medir su desempeño y cambiar su trayectoria de acuerdo con los cambios en el ambiente, en tiempo real, generalmente tienen más eficiencia y quedan un paso adelante.
