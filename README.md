@@ -8,7 +8,7 @@ Lo mejor del sistema de gestión hospitalaria es que se adapta a las necesidades
 ## Comenzando 🚀
 Puedes obtener el proyecto de dos formas
 ```
-	•  Git clone https://github.com/AndresDFX/HSM.git
+	•  Git clone https://github.com/AndresDFX/SGH-DIU.git
 	•  En la parte superior del proyecto “Download ZIP”
 ```
 
@@ -58,6 +58,7 @@ Usamos [Git](https://git-scm.com/) para el versionado. Para todas las versiones 
 ## Autores ✒️
 
 * **Andres Castaño** - *Analisis y Desarrollo* - [AndresDFX](https://github.com/AndresDFX)
+* **Jesus Cuesta** - *Analisis y Desarrollo*
 
 También puedes mirar la lista de todos los [contribuyentes](https://github.com/AndresDFX/HSM/contributors) quíenes han participado en este proyecto. 
 
