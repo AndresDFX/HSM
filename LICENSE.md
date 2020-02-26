@@ -16,7 +16,7 @@ El Software puede ser del tipo, pero sin estar limitado a (i) programa ejecutabl
 2.5  Software Derivado: obras derivadas del Software, tales como modificaciones, actualizaciones y mejoras de la misma.  
 2.6  Usuario: cualquier persona, natural o jurídica, que obtenga una copia del Software.  
 
-### 3.      Derechos del HSM 
+### 3.      Derechos
 3.1  HSM se reserva todos los derechos de propiedad intelectual, incluyendo sin limitación derechos de autor, relacionados con o asociados al Software.  
 3.2  HSM se reserva expresamente los derechos de ceder, transferir y/o sub-licenciar el Software y/o cualquiera de sus componentes a terceros sin previo aviso.  
 
@@ -37,7 +37,7 @@ Los procedimientos y resultados obtenidos en base a la ejecución de este softwa
 6.1.1 En el caso de Software del Fondo Multilateral de Inversiones ("FOMIN"), la exención de responsabilidad deberá ser: "Las opiniones expresadas en esta obra son de los autores y no necesariamente reflejan el punto de vista del BID, de su Directorio Ejecutivo ni de los países que representa, así como tampoco del Comité de Donantes del FOMIN ni de los países que representa."  
 6.2 El Usuario podrá incluir en el Software Derivado una referencia al Software como obra original, siempre y cuando dicho aviso no genere confusión alguna respecto a la titularidad de los derechos del BID sobre el Software.  
 
-### 7.      Nombre y Logo del HSM
+### 7.      Nombre y Logo
 El Usuario no podrá hacer uso del nombre y/o logo del HSM para fines diferentes a los aquí estipulados, ni podrá hacer promesas, ni adquirir compromisos u obligaciones, ni otorgar garantías de ninguna clase en nombre del BID.
 
 ### 8.      Declaraciones y Garantías

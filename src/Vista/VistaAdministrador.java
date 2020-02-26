@@ -21,7 +21,6 @@ import javax.swing.text.DefaultEditorKit;
 import java.awt.Cursor;
 import java.io.File;
 import javax.swing.DefaultListModel;
-import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -49,13 +48,13 @@ public class VistaAdministrador extends javax.swing.JFrame {
     Control controladora;
     Idioma idioma;
     
-    private Image iconoVentana;
     private String extension;
     private String rutaRespaldo;    
     private final byte RESPALDO;
     private final byte RESTAURACION;
-    private final File carpetaAutomaticos;
+    private final Image iconoVentana;
     private final File carpetaManuales;
+    private final VentanaLogin VL;
     private static VistaAdministrador INSTANCE = null;
       
 //=======================================================================================================    
@@ -72,11 +71,11 @@ public class VistaAdministrador extends javax.swing.JFrame {
         acciones = jTextFieldBuscar.getActionMap();
         validacionTotal = new Validaciones();
         controladora = new Control();
-        carpetaAutomaticos = new File("Backups\\Automaticos");
-        carpetaManuales = new File("Backups\\Manuales");         
+        carpetaManuales = new File("Backups\\Manuales");     
         iconoVentana = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/Logos/iconoHospital.png"));
         RESPALDO = 1;
         RESTAURACION = 2;
+        VL = VentanaLogin.getInstancia();
         
         //Implementacion de Ajustes
         ajustesGraficos();
@@ -131,26 +130,23 @@ public class VistaAdministrador extends javax.swing.JFrame {
     
     public void cambiarIdioma(String nombreIdioma){
         
-        idioma = new Idioma(nombreIdioma);        
-              
+        idioma = new Idioma(nombreIdioma);      
+        
+        //===============VENTANA LOGIN===================================================
+        VL.jLabelIngresar.setText(idioma.getProperty("iniciar_sesion"));
+        VL.jLabelTitulo.setText(idioma.getProperty("titulo_login"));
+
+        
+        //===============VENTANA ADMINISTRADOR===========================================
+        
         //Modulo Menu
         jLabelTitulo.setText(idioma.getProperty("titulo"));
-        jLabelRol1.setText(idioma.getProperty("titulo"));
         jLabelRol2.setText(idioma.getProperty("bienvenido"));
-
         jLabelCamas.setText(idioma.getProperty("cama"));
         jLabelCampanas.setText(idioma.getProperty("campana"));
         jLabelUsuarios.setText(idioma.getProperty("usuarios"));
-
+        jLabelHerramientas.setText(idioma.getProperty("herramientas"));
         jLabelMedicinas.setText(idioma.getProperty("medicina"));
-        
-        //Modulo Reportes
-        jLabelTituloReport.setText(idioma.getProperty("titulo_reportes"));
-        jLabelListWorker.setText(idioma.getProperty("lista_empleados"));
-        jLabeHistoryClinic.setText(idioma.getProperty("historia_clinica"));
-        jLabelNumberQuote.setText(idioma.getProperty("num_citas"));
-        jLabelMonthlyAgenda.setText(idioma.getProperty("agenda_mensual"));
-        jLabelHome8.setText(idioma.getProperty("menu"));
         
         //Modulo Camas
         jLabelTituloCama.setText(idioma.getProperty("titulo_camas"));
@@ -264,8 +260,8 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jLabelTipoBackup.setText(idioma.getProperty("tipo_respaldo"));
         jLabelTituloRuta.setText(idioma.getProperty("tipo_ruta"));
         jLabelFormatoSalida.setText(idioma.getProperty("formato_salida"));
-        jLabelTituloSO.setText(idioma.getProperty("sistema_operativo"));
-        jLabelTituloTablas.setText(idioma.getProperty("titulo_tablas"));      
+        jLabelTituloTablas.setText(idioma.getProperty("titulo_tablas"));   
+        jRadioParcial.setText(idioma.getProperty("parcial"));
         jLabelHome6.setText(idioma.getProperty("menu"));
         jLabelHome7.setText(idioma.getProperty("menu"));
         jLabelHome9.setText(idioma.getProperty("menu"));
@@ -505,9 +501,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
     
     public void editarPaciente(String cedula){
 
-        ArrayList <String> paciente = (ArrayList)controladora.mostrarPaciente(cedula);
-        
-        
+        ArrayList <String> paciente = (ArrayList)controladora.mostrarPaciente(cedula);     
         jTextFieldSeguridad.setText(paciente.get(0));
         jTextFieldActividad.setText(paciente.get(2));
         jTextFieldCedula1.setText(paciente.get(3));
@@ -915,6 +909,9 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jPanelAreas = new javax.swing.JPanel();
         jLabelAreas = new javax.swing.JLabel();
         jLabelimgAreas = new javax.swing.JLabel();
+        jPanelHerramientas = new javax.swing.JPanel();
+        jLabelHerramientas = new javax.swing.JLabel();
+        jLabelimgHerramientas = new javax.swing.JLabel();
         rSButtonCerrarSesion = new rojerusan.RSButtonPane();
         jLabelimgCerrarSesion = new javax.swing.JLabel();
         jPanelStaff = new javax.swing.JPanel();
@@ -1178,21 +1175,6 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jScrollPaneTablaArea = new javax.swing.JScrollPane();
         rSTablaArea = new rojerusan.RSTableMetro();
         rSButtonMetroFiltrar13 = new rojerusan.RSButtonMetro();
-        jPanelReports = new javax.swing.JPanel();
-        jPanelTituloReport = new javax.swing.JPanel();
-        jLabelTituloReport = new javax.swing.JLabel();
-        jLabelimgReport = new javax.swing.JLabel();
-        rSButtonPaneHome8 = new rojerusan.RSButtonPane();
-        jLabelHome8 = new javax.swing.JLabel();
-        rSButtonMetroListWorker = new rojerusan.RSButtonMetro();
-        rSButtonMetroHistoryClinic = new rojerusan.RSButtonMetro();
-        rSButtonMetroNumberQuote = new rojerusan.RSButtonMetro();
-        rSButtonMetroMonthlyAgenda = new rojerusan.RSButtonMetro();
-        jLabelNumberQuote = new javax.swing.JLabel();
-        jLabelSeleccionar1 = new javax.swing.JLabel();
-        jLabelListWorker = new javax.swing.JLabel();
-        jLabeHistoryClinic = new javax.swing.JLabel();
-        jLabelMonthlyAgenda = new javax.swing.JLabel();
         jPanelTools = new javax.swing.JPanel();
         jPanelTituloTools = new javax.swing.JPanel();
         jLabelTituloTools = new javax.swing.JLabel();
@@ -2367,7 +2349,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jLabelRol1.setFont(new java.awt.Font("Segoe UI Light", 0, 34)); // NOI18N
         jLabelRol1.setForeground(new java.awt.Color(255, 255, 255));
         jLabelRol1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelRol1.setText("SGH");
+        jLabelRol1.setText("HSM");
         jPanelRol.add(jLabelRol1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 210, 80));
 
         jLabelRol2.setBackground(new java.awt.Color(52, 152, 219));
@@ -2485,7 +2467,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jLabelimgMedicinas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Menu/Admin/pastillas_100px.png"))); // NOI18N
         jPanelMedicinas.add(jLabelimgMedicinas, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 120));
 
-        jPanelMenu.add(jPanelMedicinas, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 410, 150, 170));
+        jPanelMenu.add(jPanelMedicinas, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 410, 150, 170));
 
         jPanelAreas.setBackground(new java.awt.Color(255, 255, 255));
         jPanelAreas.setToolTipText("Gestión de areas");
@@ -2512,7 +2494,33 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jLabelimgAreas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Menu/Admin/areas_100px.png"))); // NOI18N
         jPanelAreas.add(jLabelimgAreas, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 120));
 
-        jPanelMenu.add(jPanelAreas, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 410, -1, 170));
+        jPanelMenu.add(jPanelAreas, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 410, -1, 170));
+
+        jPanelHerramientas.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelHerramientas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanelHerramientasMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanelHerramientasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanelHerramientasMouseExited(evt);
+            }
+        });
+        jPanelHerramientas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabelHerramientas.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelHerramientas.setFont(new java.awt.Font("Segoe UI Semilight", 1, 18)); // NOI18N
+        jLabelHerramientas.setForeground(new java.awt.Color(52, 152, 219));
+        jLabelHerramientas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelHerramientas.setText("Herramientas");
+        jPanelHerramientas.add(jLabelHerramientas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 150, 30));
+
+        jLabelimgHerramientas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Menu/Admin/herramientas_100px.png"))); // NOI18N
+        jPanelHerramientas.add(jLabelimgHerramientas, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 120));
+
+        jPanelMenu.add(jPanelHerramientas, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 410, 150, 170));
 
         rSButtonCerrarSesion.setBackground(new java.awt.Color(52, 152, 219));
         rSButtonCerrarSesion.setToolTipText("Cerrar sesión");
@@ -2528,7 +2536,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jLabelimgCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Global/salir_100px.png"))); // NOI18N
         rSButtonCerrarSesion.add(jLabelimgCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, 120));
 
-        jPanelMenu.add(rSButtonCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 410, 150, 170));
+        jPanelMenu.add(rSButtonCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 410, 150, 170));
 
         jPanelPpal.add(jPanelMenu, "card2");
 
@@ -4947,105 +4955,6 @@ public class VistaAdministrador extends javax.swing.JFrame {
 
         jPanelPpal.add(jPanelArea, "card4");
 
-        jPanelReports.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanelTituloReport.setBackground(new java.awt.Color(51, 152, 219));
-        jPanelTituloReport.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabelTituloReport.setFont(new java.awt.Font("Segoe UI Light", 0, 36)); // NOI18N
-        jLabelTituloReport.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelTituloReport.setText("REPORT MANAGER");
-        jPanelTituloReport.add(jLabelTituloReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 520, -1));
-
-        jLabelimgReport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Menu/Admin/reportes_100px.png"))); // NOI18N
-        jPanelTituloReport.add(jLabelimgReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 110, 90));
-
-        jPanelReports.add(jPanelTituloReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 90));
-
-        rSButtonPaneHome8.setForeground(new java.awt.Color(255, 255, 255));
-        rSButtonPaneHome8.setColorHover(new java.awt.Color(102, 102, 102));
-        rSButtonPaneHome8.setColorNormal(new java.awt.Color(153, 153, 153));
-        rSButtonPaneHome8.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                rSButtonPaneHome8MouseClicked(evt);
-            }
-        });
-        rSButtonPaneHome8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabelHome8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabelHome8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelHome8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Global/home_50px.png"))); // NOI18N
-        jLabelHome8.setText("HOME");
-        jLabelHome8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, null, new java.awt.Color(255, 255, 255), null, null));
-        jLabelHome8.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        rSButtonPaneHome8.add(jLabelHome8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 40));
-
-        jPanelReports.add(rSButtonPaneHome8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 240, -1));
-
-        rSButtonMetroListWorker.setBackground(new java.awt.Color(51, 152, 219));
-        rSButtonMetroListWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Menu/Admin/empleados_100px.png"))); // NOI18N
-        rSButtonMetroListWorker.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonMetroListWorkerActionPerformed(evt);
-            }
-        });
-        jPanelReports.add(rSButtonMetroListWorker, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 150, 120, 140));
-
-        rSButtonMetroHistoryClinic.setBackground(new java.awt.Color(51, 152, 219));
-        rSButtonMetroHistoryClinic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Menu/Admin/historia_100px.png"))); // NOI18N
-        rSButtonMetroHistoryClinic.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonMetroHistoryClinicActionPerformed(evt);
-            }
-        });
-        jPanelReports.add(rSButtonMetroHistoryClinic, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 150, 120, 140));
-
-        rSButtonMetroNumberQuote.setBackground(new java.awt.Color(51, 152, 219));
-        rSButtonMetroNumberQuote.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Menu/Admin/numerocitas_100px.png"))); // NOI18N
-        rSButtonMetroNumberQuote.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonMetroNumberQuoteActionPerformed(evt);
-            }
-        });
-        jPanelReports.add(rSButtonMetroNumberQuote, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 150, 120, 140));
-
-        rSButtonMetroMonthlyAgenda.setBackground(new java.awt.Color(51, 152, 219));
-        rSButtonMetroMonthlyAgenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Menu/Admin/agendamensual_100px.png"))); // NOI18N
-        rSButtonMetroMonthlyAgenda.setToolTipText("");
-        rSButtonMetroMonthlyAgenda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSButtonMetroMonthlyAgendaActionPerformed(evt);
-            }
-        });
-        jPanelReports.add(rSButtonMetroMonthlyAgenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 340, 120, 140));
-
-        jLabelNumberQuote.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        jLabelNumberQuote.setForeground(new java.awt.Color(51, 152, 219));
-        jLabelNumberQuote.setText("Number of quote");
-        jPanelReports.add(jLabelNumberQuote, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 300, 130, -1));
-
-        jLabelSeleccionar1.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        jLabelSeleccionar1.setForeground(new java.awt.Color(51, 152, 219));
-        jLabelSeleccionar1.setText("Choose a Option:");
-        jPanelReports.add(jLabelSeleccionar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
-
-        jLabelListWorker.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        jLabelListWorker.setForeground(new java.awt.Color(51, 152, 219));
-        jLabelListWorker.setText("  List of Worker");
-        jPanelReports.add(jLabelListWorker, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, 120, -1));
-
-        jLabeHistoryClinic.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        jLabeHistoryClinic.setForeground(new java.awt.Color(51, 152, 219));
-        jLabeHistoryClinic.setText("  History Clinic");
-        jPanelReports.add(jLabeHistoryClinic, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 300, 120, -1));
-
-        jLabelMonthlyAgenda.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
-        jLabelMonthlyAgenda.setForeground(new java.awt.Color(51, 152, 219));
-        jLabelMonthlyAgenda.setText("Monthly Agenda");
-        jPanelReports.add(jLabelMonthlyAgenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 490, 120, -1));
-
-        jPanelPpal.add(jPanelReports, "card4");
-
         jPanelTools.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelTituloTools.setBackground(new java.awt.Color(51, 152, 219));
@@ -5053,7 +4962,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
 
         jLabelTituloTools.setFont(new java.awt.Font("Segoe UI Light", 0, 36)); // NOI18N
         jLabelTituloTools.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelTituloTools.setText("TOOLS MANAGER");
+        jLabelTituloTools.setText("GESTION DE HERRAMIENTAS");
         jPanelTituloTools.add(jLabelTituloTools, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 520, -1));
 
         jLabelimgTools.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Menu/Admin/tools_100px.png"))); // NOI18N
@@ -5105,27 +5014,31 @@ public class VistaAdministrador extends javax.swing.JFrame {
 
         jLabelBackupDB.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         jLabelBackupDB.setForeground(new java.awt.Color(51, 152, 219));
-        jLabelBackupDB.setText(" Backup Database");
-        jPanelPrincipal.add(jLabelBackupDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 260, 130, -1));
+        jLabelBackupDB.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelBackupDB.setText("Respaldar BD");
+        jPanelPrincipal.add(jLabelBackupDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 260, 120, -1));
 
         jLabelSeleccionar.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         jLabelSeleccionar.setForeground(new java.awt.Color(51, 152, 219));
-        jLabelSeleccionar.setText("Choose a Option:");
+        jLabelSeleccionar.setText("Seleccione una opcion:");
         jPanelPrincipal.add(jLabelSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
         jLabelCleanDB.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         jLabelCleanDB.setForeground(new java.awt.Color(51, 152, 219));
-        jLabelCleanDB.setText(" Clean Database");
+        jLabelCleanDB.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelCleanDB.setText("   Limpiar BD");
         jPanelPrincipal.add(jLabelCleanDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, 120, -1));
 
         jLabelRestoreDB.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         jLabelRestoreDB.setForeground(new java.awt.Color(51, 152, 219));
-        jLabelRestoreDB.setText("Restore Database");
-        jPanelPrincipal.add(jLabelRestoreDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, -1, -1));
+        jLabelRestoreDB.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelRestoreDB.setText("Restaurar BD");
+        jPanelPrincipal.add(jLabelRestoreDB, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 120, -1));
 
         jLabelCambiarIdioma.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         jLabelCambiarIdioma.setForeground(new java.awt.Color(51, 152, 219));
-        jLabelCambiarIdioma.setText("Change Language");
+        jLabelCambiarIdioma.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelCambiarIdioma.setText("Cambiar lenguaje");
         jPanelPrincipal.add(jLabelCambiarIdioma, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 440, 130, -1));
 
         rSButtonPaneHome6.setForeground(new java.awt.Color(255, 255, 255));
@@ -5141,7 +5054,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jLabelHome6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabelHome6.setForeground(new java.awt.Color(255, 255, 255));
         jLabelHome6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Global/home_50px.png"))); // NOI18N
-        jLabelHome6.setText("HOME");
+        jLabelHome6.setText("INICIO");
         jLabelHome6.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, null, new java.awt.Color(255, 255, 255), null, null));
         jLabelHome6.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         rSButtonPaneHome6.add(jLabelHome6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 40));
@@ -5172,7 +5085,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jLabelHome9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabelHome9.setForeground(new java.awt.Color(255, 255, 255));
         jLabelHome9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Global/home_50px.png"))); // NOI18N
-        jLabelHome9.setText("HOME");
+        jLabelHome9.setText("INICIO");
         jLabelHome9.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, null, new java.awt.Color(255, 255, 255), null, null));
         jLabelHome9.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jLabelHome9.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -5189,7 +5102,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jPanelCambiarIdioma.add(rSComboMetroIdioma, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, -1, -1));
 
         rSButtonMetroIdioma.setBackground(new java.awt.Color(51, 152, 219));
-        rSButtonMetroIdioma.setText("Change Language");
+        rSButtonMetroIdioma.setText("Cambiar lenguaje");
         rSButtonMetroIdioma.setFont(new java.awt.Font("Segoe UI Semilight", 1, 12)); // NOI18N
         rSButtonMetroIdioma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -5200,8 +5113,9 @@ public class VistaAdministrador extends javax.swing.JFrame {
 
         jLabelSeleccionIdioma.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
         jLabelSeleccionIdioma.setForeground(new java.awt.Color(51, 152, 219));
-        jLabelSeleccionIdioma.setText("Select Language:");
-        jPanelCambiarIdioma.add(jLabelSeleccionIdioma, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 130, -1));
+        jLabelSeleccionIdioma.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelSeleccionIdioma.setText("Seleccionar lenguaje:");
+        jPanelCambiarIdioma.add(jLabelSeleccionIdioma, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 180, -1));
 
         jPanelSliders6.add(jPanelCambiarIdioma, "card5");
 
@@ -5216,7 +5130,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jPanelBackupBD.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 650, 10));
 
         rSButtonMetroBackup.setBackground(new java.awt.Color(51, 152, 219));
-        rSButtonMetroBackup.setText("Go Backup");
+        rSButtonMetroBackup.setText("Ejecutar");
         rSButtonMetroBackup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rSButtonMetroBackupActionPerformed(evt);
@@ -5226,24 +5140,24 @@ public class VistaAdministrador extends javax.swing.JFrame {
 
         jLabelFormatoSalida.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         jLabelFormatoSalida.setForeground(new java.awt.Color(51, 152, 219));
-        jLabelFormatoSalida.setText("Output Format");
+        jLabelFormatoSalida.setText("Formato salida");
         jPanelBackupBD.add(jLabelFormatoSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, 26));
 
-        jLabelTituloRuta.setFont(new java.awt.Font("Segoe UI Light", 1, 14)); // NOI18N
+        jLabelTituloRuta.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         jLabelTituloRuta.setForeground(new java.awt.Color(51, 152, 219));
-        jLabelTituloRuta.setText("Save in");
+        jLabelTituloRuta.setText("Guardar en");
         jPanelBackupBD.add(jLabelTituloRuta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, 26));
 
         jLabelTipoBackup.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         jLabelTipoBackup.setForeground(new java.awt.Color(51, 152, 219));
-        jLabelTipoBackup.setText("Backup Type");
+        jLabelTipoBackup.setText("Tipo de backup");
         jLabelTipoBackup.setToolTipText("");
         jPanelBackupBD.add(jLabelTipoBackup, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
         buttonGroupTipo.add(jRadioParcial);
         jRadioParcial.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         jRadioParcial.setForeground(new java.awt.Color(51, 152, 219));
-        jRadioParcial.setText("Partial");
+        jRadioParcial.setText("Parcial");
         jRadioParcial.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jRadioParcial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -5297,17 +5211,17 @@ public class VistaAdministrador extends javax.swing.JFrame {
 
         jLabelTituloSO.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         jLabelTituloSO.setForeground(new java.awt.Color(51, 152, 219));
-        jLabelTituloSO.setText("Operating System");
+        jLabelTituloSO.setText("OS");
         jPanelBackupBD.add(jLabelTituloSO, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, 26));
 
         jLabelTituloTablas.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         jLabelTituloTablas.setForeground(new java.awt.Color(51, 152, 219));
-        jLabelTituloTablas.setText("Select the tables to.. ");
+        jLabelTituloTablas.setText("Seleccionar las tablas..");
         jPanelBackupBD.add(jLabelTituloTablas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 159, -1));
 
         jLabelTituloBackup.setFont(new java.awt.Font("Segoe UI Light", 1, 12)); // NOI18N
         jLabelTituloBackup.setForeground(new java.awt.Color(51, 152, 219));
-        jLabelTituloBackup.setText("Backup");
+        jLabelTituloBackup.setText("Tablas seleccionadas");
         jPanelBackupBD.add(jLabelTituloBackup, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 200, -1, -1));
 
         jTableTablasBackup.setBackground(new java.awt.Color(202, 228, 201));
@@ -5362,7 +5276,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jLabelHome7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabelHome7.setForeground(new java.awt.Color(255, 255, 255));
         jLabelHome7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Global/home_50px.png"))); // NOI18N
-        jLabelHome7.setText("HOME");
+        jLabelHome7.setText("INICIO");
         jLabelHome7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, null, new java.awt.Color(255, 255, 255), null, null));
         jLabelHome7.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jLabelHome7.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -6209,17 +6123,10 @@ public class VistaAdministrador extends javax.swing.JFrame {
                 if(controladora.existePaciente(cedula)==false)
                 {
                     if(controladora.guardarPaciente(nombre, cedula, direccion, telefono, seguridadSocial, fechaNacimiento, actividad,cedula))
-                    {                      
-                            if(controladora.guardarHistoriaClinica(cedula))
-                            {
-                                new jInformation(this, true, "<html><center> El paciente se guardo correctamente </center></html>").setVisible(true);
-                                limpiarComponentes(jPanelAgregarPaciente);
-                            }
+                    {                                             
+                        new jInformation(this, true, "<html><center> El paciente se guardo correctamente </center></html>").setVisible(true);
+                        limpiarComponentes(jPanelAgregarPaciente);             
 
-                            else
-                            {
-                                new jWarning(this, true, "<html><center> El paciente no se guardo</center></html>").setVisible(true);
-                            }    
                     }
                     
                     else
@@ -7011,31 +6918,6 @@ public class VistaAdministrador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldBuscar1KeyReleased
 
-    private void rSButtonMetroListWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetroListWorkerActionPerformed
-        this.setVisible(false);
-        new ListadoEmpleados().setVisible(true);
-    }//GEN-LAST:event_rSButtonMetroListWorkerActionPerformed
-
-    private void rSButtonMetroHistoryClinicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetroHistoryClinicActionPerformed
-        this.setVisible(false);
-        new HistoriaClinica().setVisible(true);
-    }//GEN-LAST:event_rSButtonMetroHistoryClinicActionPerformed
-
-    private void rSButtonMetroNumberQuoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetroNumberQuoteActionPerformed
-        this.setVisible(false);
-        new CitasMes().setVisible(true);
-    }//GEN-LAST:event_rSButtonMetroNumberQuoteActionPerformed
-
-    private void rSButtonPaneHome8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSButtonPaneHome8MouseClicked
-        jPanelReports.setVisible(false);
-        jPanelMenu.setVisible(true);
-    }//GEN-LAST:event_rSButtonPaneHome8MouseClicked
-
-    private void rSButtonMetroMonthlyAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetroMonthlyAgendaActionPerformed
-        this.setVisible(false);
-        new AgendaMensual().setVisible(true);
-    }//GEN-LAST:event_rSButtonMetroMonthlyAgendaActionPerformed
-
     private void jTextFieldDireccion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDireccion1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldDireccion1ActionPerformed
@@ -7643,7 +7525,53 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jTextFieldBuscar5.setText("");
     }//GEN-LAST:event_jTextFieldBuscar5FocusGained
 
+    private void jPanelHerramientasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelHerramientasMouseClicked
+        jPanelMenu.setVisible(false);
+        jPanelTools.setVisible(true);
+
+    }//GEN-LAST:event_jPanelHerramientasMouseClicked
+
+    private void jPanelHerramientasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelHerramientasMouseEntered
+        ponerColor(jPanelHerramientas);
+    }//GEN-LAST:event_jPanelHerramientasMouseEntered
+
+    private void jPanelHerramientasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelHerramientasMouseExited
+        repintarColor(jPanelHerramientas);
+    }//GEN-LAST:event_jPanelHerramientasMouseExited
+
 //=======================================================================================================
+    
+        public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new VistaAdministrador().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupFormato;
@@ -7654,7 +7582,6 @@ public class VistaAdministrador extends javax.swing.JFrame {
     public static javax.swing.JButton jButtonSlider3;
     public static javax.swing.JButton jButtonSlider4;
     private javax.swing.JCheckBox jCheckBoxDisponible;
-    private javax.swing.JLabel jLabeHistoryClinic;
     private javax.swing.JLabel jLabelActividad;
     private javax.swing.JLabel jLabelAgregarArea;
     private javax.swing.JLabel jLabelAgregarCama;
@@ -7705,6 +7632,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelFechaAsignacion;
     private javax.swing.JLabel jLabelFechaNacimiento;
     private javax.swing.JLabel jLabelFormatoSalida;
+    private javax.swing.JLabel jLabelHerramientas;
     private javax.swing.JLabel jLabelHome;
     private javax.swing.JLabel jLabelHome1;
     private javax.swing.JLabel jLabelHome2;
@@ -7712,10 +7640,8 @@ public class VistaAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelHome4;
     private javax.swing.JLabel jLabelHome6;
     private javax.swing.JLabel jLabelHome7;
-    private javax.swing.JLabel jLabelHome8;
     private javax.swing.JLabel jLabelHome9;
     private javax.swing.JLabel jLabelJefe;
-    private javax.swing.JLabel jLabelListWorker;
     private javax.swing.JLabel jLabelListaCamas;
     private javax.swing.JLabel jLabelListaCampanas;
     private javax.swing.JLabel jLabelListaEnfermeras;
@@ -7731,7 +7657,6 @@ public class VistaAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelModificarHabilidad;
     private javax.swing.JLabel jLabelModificarMedicina;
     private javax.swing.JLabel jLabelModificarPaciente;
-    private javax.swing.JLabel jLabelMonthlyAgenda;
     private javax.swing.JLabel jLabelNombre;
     private javax.swing.JLabel jLabelNombre1;
     private javax.swing.JLabel jLabelNombre2;
@@ -7739,7 +7664,6 @@ public class VistaAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelNombre4;
     private javax.swing.JLabel jLabelNombre5;
     private javax.swing.JLabel jLabelNombre6;
-    private javax.swing.JLabel jLabelNumberQuote;
     private javax.swing.JLabel jLabelObjetivo;
     private javax.swing.JLabel jLabelPaciente;
     private javax.swing.JLabel jLabelRestoreDB;
@@ -7751,7 +7675,6 @@ public class VistaAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelSeguridadSocial;
     private javax.swing.JLabel jLabelSeleccionIdioma;
     private javax.swing.JLabel jLabelSeleccionar;
-    private javax.swing.JLabel jLabelSeleccionar1;
     private javax.swing.JLabel jLabelTelefono;
     private javax.swing.JLabel jLabelTelefono1;
     private javax.swing.JLabel jLabelTipoBackup;
@@ -7761,7 +7684,6 @@ public class VistaAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTituloCama;
     private javax.swing.JLabel jLabelTituloCampaing;
     private javax.swing.JLabel jLabelTituloMedicina;
-    private javax.swing.JLabel jLabelTituloReport;
     private javax.swing.JLabel jLabelTituloRuta;
     private javax.swing.JLabel jLabelTituloSO;
     private javax.swing.JLabel jLabelTituloTablas;
@@ -7774,11 +7696,11 @@ public class VistaAdministrador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelimgCamas;
     private javax.swing.JLabel jLabelimgCampanas;
     private javax.swing.JLabel jLabelimgCerrarSesion;
+    private javax.swing.JLabel jLabelimgHerramientas;
     private javax.swing.JLabel jLabelimgMedicina;
     private javax.swing.JLabel jLabelimgMedicinaCampaing;
     private javax.swing.JLabel jLabelimgMedicinas;
     private javax.swing.JLabel jLabelimgPerfil;
-    private javax.swing.JLabel jLabelimgReport;
     private javax.swing.JLabel jLabelimgTools;
     private javax.swing.JLabel jLabelimgUsuario;
     private javax.swing.JLabel jLabelimgUsuarios;
@@ -7802,6 +7724,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelCambiarIdioma;
     private javax.swing.JPanel jPanelCampaing;
     private javax.swing.JPanel jPanelCampanas;
+    private javax.swing.JPanel jPanelHerramientas;
     private javax.swing.JPanel jPanelMedicians;
     private javax.swing.JPanel jPanelMedicinas;
     private javax.swing.JPanel jPanelMenu;
@@ -7816,7 +7739,6 @@ public class VistaAdministrador extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelPerfil;
     private javax.swing.JPanel jPanelPpal;
     private javax.swing.JPanel jPanelPrincipal;
-    private javax.swing.JPanel jPanelReports;
     private javax.swing.JPanel jPanelRol;
     private javax.swing.JPanel jPanelSlider;
     private javax.swing.JPanel jPanelSlider1;
@@ -7835,7 +7757,6 @@ public class VistaAdministrador extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelTituloBed;
     private javax.swing.JPanel jPanelTituloCampaing;
     private javax.swing.JPanel jPanelTituloMedicina;
-    private javax.swing.JPanel jPanelTituloReport;
     private javax.swing.JPanel jPanelTituloTools;
     private javax.swing.JPanel jPanelTituloUsuario;
     private javax.swing.JPanel jPanelTools;
@@ -8026,7 +7947,6 @@ public class VistaAdministrador extends javax.swing.JFrame {
     private rojerusan.RSButtonMetro rSButtonMetroGuardar4;
     private rojerusan.RSButtonMetro rSButtonMetroGuardar5;
     private rojerusan.RSButtonMetro rSButtonMetroGuardar6;
-    private rojerusan.RSButtonMetro rSButtonMetroHistoryClinic;
     private rojerusan.RSButtonMetro rSButtonMetroIdioma;
     private rojerusan.RSButtonMetro rSButtonMetroIngresar;
     private rojerusan.RSButtonMetro rSButtonMetroIzquierda;
@@ -8043,13 +7963,10 @@ public class VistaAdministrador extends javax.swing.JFrame {
     private rojerusan.RSButtonMetro rSButtonMetroLimpiar7;
     private rojerusan.RSButtonMetro rSButtonMetroLimpiar8;
     private rojerusan.RSButtonMetro rSButtonMetroLimpiar9;
-    private rojerusan.RSButtonMetro rSButtonMetroListWorker;
-    private rojerusan.RSButtonMetro rSButtonMetroMonthlyAgenda;
     private rojerusan.RSButtonMetro rSButtonMetroMostrar2;
     private rojerusan.RSButtonMetro rSButtonMetroMostrar4;
     private rojerusan.RSButtonMetro rSButtonMetroMostrar5;
     private rojerusan.RSButtonMetro rSButtonMetroMostrar6;
-    private rojerusan.RSButtonMetro rSButtonMetroNumberQuote;
     private rojerusan.RSButtonMetro rSButtonMetroRestoreBD;
     private rojerusan.RSButtonPane rSButtonModificarArea;
     private rojerusan.RSButtonPane rSButtonModificarCama;
@@ -8065,7 +7982,6 @@ public class VistaAdministrador extends javax.swing.JFrame {
     private rojerusan.RSButtonPane rSButtonPaneHome4;
     private rojerusan.RSButtonPane rSButtonPaneHome6;
     private rojerusan.RSButtonPane rSButtonPaneHome7;
-    private rojerusan.RSButtonPane rSButtonPaneHome8;
     private rojerusan.RSButtonPane rSButtonPaneHome9;
     private rojerusan.RSComboMetro rSComboArea2;
     private rojerusan.RSComboMetro rSComboMetroArea;

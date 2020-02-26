@@ -28,8 +28,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import rojerusan.RSTableMetro;
 import net.proteanit.sql.DbUtils;
 
@@ -167,6 +165,13 @@ public class Control {
     public ArrayList mostrarArea(String cedula){
         return daoArea.mostrarArea(cedula); 
     }
+    
+    
+    public void consultarAreas(RSTableMetro tabla) {
+        ResultSet rs = null;
+        rs = daoArea.consultarAreas();       
+        tabla.setModel(DbUtils.resultSetToTableModel(rs));
+    }
 //=======================================================================================================    
     /**
      * CAMAS
@@ -242,6 +247,12 @@ public class Control {
     public ArrayList mostrarCama(String cedula){
         return daoCama.mostrarCama(cedula); 
     }
+    
+    public void consultarCamas(RSTableMetro tabla) {
+        ResultSet rs = null;
+        rs = daoCama.consultarCamas();       
+        tabla.setModel(DbUtils.resultSetToTableModel(rs));
+    }
 //=======================================================================================================    
     /**
      * EMPLEADOS
@@ -280,6 +291,13 @@ public class Control {
     
     public ArrayList mostrarEmpleado(String cedula){
         return daoEmpleado.mostrarEmpleado(cedula); 
+    }
+    
+    
+    public void consultarEmpleados(RSTableMetro tabla) {
+        ResultSet rs = null;
+        rs = daoEmpleado.consultarEmpleados();       
+        tabla.setModel(DbUtils.resultSetToTableModel(rs));
     }
 //=======================================================================================================    
     /**
@@ -412,28 +430,14 @@ public class Control {
         return daoPaciente.mostrarPaciente(cedula); 
     }
     
-    
-//=======================================================================================================    
-    
-    /**
-     * HISTORIAS CLINICAS
-     */
-    public boolean guardarHistoriaClinica(String cedula){
-        boolean guardada = false;
-        if(daoHistoria.guardarHistoria(cedula)){
-            guardada = true;
-        }
-        return guardada;                       
-    }
-    
-    public String[] consultarHistoria(String cedula){
-          return daoHistoria.consultarDatosHistoria(cedula);
-    }
-    
-    public ResultSet consultarRegistros(String cedula){
-        return daoHistoria.consultarRegistrosHistoria(cedula);
-    }
-    
+    public void consultarPacientes ( RSTableMetro tabla) throws SQLException{
+        ResultSet rs = null;
+        rs = daoPaciente.consultarPacientes();       
+        tabla.setModel(DbUtils.resultSetToTableModel(rs));
+
+   }
+
+
 //=======================================================================================================    
     /**
      * CITAS
@@ -524,6 +528,14 @@ public class Control {
         return daoCita.mostrarunaCita(cedula); 
     }
     
+        
+    public void consultarCitas(RSTableMetro tabla) {
+        ResultSet rs = null;
+        rs = daoCita.consultarCitas();       
+        tabla.setModel(DbUtils.resultSetToTableModel(rs));
+    }
+
+
 //=======================================================================================================    
     /**
      * HABILIDADES
@@ -582,6 +594,12 @@ public class Control {
     
     public boolean existeHabilidad(String codigo){
         return daoHabilidades.existeHabilidad(codigo);
+    }
+    
+    public void consultarHabilidades(RSTableMetro tabla) {
+        ResultSet rs = null;
+        rs = daoHabilidades.consultarHabilidades();       
+        tabla.setModel(DbUtils.resultSetToTableModel(rs));
     }
 //=======================================================================================================    
     
@@ -646,6 +664,13 @@ public class Control {
     
     public ArrayList mostrarCampa(String cedula){
         return daoCampania.mostrarCampa(cedula); 
+    }
+    
+    
+    public void consultarCampanas(RSTableMetro tabla) {
+        ResultSet rs = null;
+        rs = daoCampania.consultarCampanas();       
+        tabla.setModel(DbUtils.resultSetToTableModel(rs));
     }
 //=======================================================================================================    
     
@@ -737,6 +762,13 @@ public class Control {
     public ArrayList mostrarunaCausa(String cedula){
         return daoCausas.mostrarunaCausa(cedula); 
     }
+    
+    public void consultarCausas(RSTableMetro tabla) {
+        ResultSet rs = null;
+        rs = daoCausas.consultarCausas();       
+        tabla.setModel(DbUtils.resultSetToTableModel(rs));
+    }
+
 //=======================================================================================================    
     /**
      * MEDICAMENTOS
@@ -800,6 +832,12 @@ public class Control {
     public ArrayList mostrarMedicamento(String cedula){
         return daoMedicamentos.mostrarMedicina(cedula); 
     }
+    
+    public void consultarMedicamentos(RSTableMetro tabla) {
+        ResultSet rs = null;
+        rs = daoMedicamentos.consultarMedicamentos();       
+        tabla.setModel(DbUtils.resultSetToTableModel(rs));
+    }
 //=======================================================================================================
 
     /**
@@ -822,63 +860,5 @@ public class Control {
    {
        return daoHerramientas.realizarRestore(source);
    }
-    
-//=======================================================================================================
-  
-   public void consultarPacientes ( RSTableMetro tabla) throws SQLException{
-        ResultSet rs = null;
-        rs = daoPaciente.consultarPacientes();       
-        tabla.setModel(DbUtils.resultSetToTableModel(rs));
-
-   }
-
-    public void consultarEmpleados(RSTableMetro tabla) {
-        ResultSet rs = null;
-        rs = daoEmpleado.consultarEmpleados();       
-        tabla.setModel(DbUtils.resultSetToTableModel(rs));
-    }
-
-    public void consultarHabilidades(RSTableMetro tabla) {
-        ResultSet rs = null;
-        rs = daoHabilidades.consultarHabilidades();       
-        tabla.setModel(DbUtils.resultSetToTableModel(rs));
-    }
-
-    public void consultarMedicamentos(RSTableMetro tabla) {
-        ResultSet rs = null;
-        rs = daoMedicamentos.consultarMedicamentos();       
-        tabla.setModel(DbUtils.resultSetToTableModel(rs));
-    }
-
-    public void consultarCampanas(RSTableMetro tabla) {
-        ResultSet rs = null;
-        rs = daoCampania.consultarCampanas();       
-        tabla.setModel(DbUtils.resultSetToTableModel(rs));
-    }
-
-    public void consultarCamas(RSTableMetro tabla) {
-        ResultSet rs = null;
-        rs = daoCama.consultarCamas();       
-        tabla.setModel(DbUtils.resultSetToTableModel(rs));
-    }
-
-    public void consultarAreas(RSTableMetro tabla) {
-        ResultSet rs = null;
-        rs = daoArea.consultarAreas();       
-        tabla.setModel(DbUtils.resultSetToTableModel(rs));
-    }
-
-    public void consultarCausas(RSTableMetro tabla) {
-        ResultSet rs = null;
-        rs = daoCausas.consultarCausas();       
-        tabla.setModel(DbUtils.resultSetToTableModel(rs));
-    }
-
-    public void consultarCitas(RSTableMetro tabla) {
-        ResultSet rs = null;
-        rs = daoCita.consultarCitas();       
-        tabla.setModel(DbUtils.resultSetToTableModel(rs));
-    }
-
     
 }

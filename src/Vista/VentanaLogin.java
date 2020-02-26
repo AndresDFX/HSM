@@ -20,6 +20,7 @@ public class VentanaLogin extends javax.swing.JFrame {
     public static Image iconoVentana;
     
     //Declaracion de Variables de Clases
+    private static VentanaLogin INSTANCE = null;
     private final Control controlador;
     private final Validaciones validacionTotal;
     private final VistaAdministrador VA;
@@ -48,6 +49,30 @@ public class VentanaLogin extends javax.swing.JFrame {
         ajustesGraficos();
 
     }  
+    
+    
+//=======================================================================================================
+    /**
+    * Metodo que permite crear una nueva instacia de la clase solo si ya no ha sido creada otra
+    */
+    
+    private synchronized static void crearInstancia(){
+        if(INSTANCE == null){
+            INSTANCE = new VentanaLogin();         
+        }
+    }
+    
+//=======================================================================================================   
+    /**
+    * Metodo que permite obtener la instancia de la clase que ha sido creada
+    * @return El objeto de la instancia de la clase
+    */
+    
+    public static VentanaLogin getInstancia(){
+        crearInstancia();
+       return INSTANCE;
+    }
+    
 //=======================================================================================================
     /**
      * Metodo para poner un color cuando el mouse este encima del panel
@@ -300,10 +325,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldUsuarioActionPerformed
 //=======================================================================================================
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+        public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -311,21 +333,20 @@ public class VentanaLogin extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -335,14 +356,14 @@ public class VentanaLogin extends javax.swing.JFrame {
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.jdesktop.swing.animation.timing.evaluators.EvaluatorLine2D evaluatorLine2D1;
     private javax.swing.JLabel jLabelAcercaDe;
     private javax.swing.JLabel jLabelCerrar;
     private javax.swing.JLabel jLabelFondo;
-    private javax.swing.JLabel jLabelIngresar;
-    private javax.swing.JLabel jLabelTitulo;
+    public static javax.swing.JLabel jLabelIngresar;
+    public static javax.swing.JLabel jLabelTitulo;
     private javax.swing.JLabel jLabelimgContrasena;
     private javax.swing.JLabel jLabelimgUsuario;
     private javax.swing.JPanel jPanelIngresar;

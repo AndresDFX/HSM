@@ -1,14 +1,15 @@
-# Hospital System Management - DATFIN
+# Hospital System Management - HSM
+
 Los datos recogidos en las diversas áreas del hospital, cuando relacionados se transforman en instrumentos útiles para la evaluación de la asistencia prestada, cantidad y tipo de recursos involucrados, control de costos generados en la producción de los servicios e índice de solución de los problemas. 
 
 La gestión hospitalaria está vinculada a la alta complejidad, con una infinidad de  reglamentaciones que limita cambios en el sector, costos crecientes y la formación de un paciente cada vez más exigente. En ese escenario, las organizaciones de salud que consiguen desarrollar la habilidad de medir su desempeño y cambiar su trayectoria de acuerdo con los cambios en el ambiente, en tiempo real, generalmente tienen más eficiencia y quedan un paso adelante.
 
 Lo mejor del sistema de gestión hospitalaria es que se adapta a las necesidades y formas de trabajo de cada especialidad clínica hospitalaria, potenciando su flexibilidad y permitiendo compartir información por distintos especialistas.
 
-## Comenzando 🚀
+### Comenzando 🚀
 Puedes obtener el proyecto de dos formas
 ```
-	•  Git clone https://github.com/AndresDFX/SGH-DIU.git
+	•  Git clone https://github.com/AndresDFX/HSM.git
 	•  En la parte superior del proyecto “Download ZIP”
 ```
 
@@ -37,30 +38,25 @@ Puedes obtener el proyecto de dos formas
 
 	![Alt text](/screenshots/build_netbeans.png)
 
-5.	Para cargar la base de datos podemos realizar un restore o ejecutar el script SQL ambas convenciones se encuentran en la carpeta “db” del proyecto
+5.	Para cargar la base de datos podemos realizar un restore (SOLO POSTGRESQL) o ejecutar el script SQL ambas opciones se encuentran en la carpeta “db” del proyecto.
 
-## Deployment 📦
-1.	Para ingresar al Rol del admin las credenciales son admin:admin
+### Deployment 📦
+1.	Para ingresar al Rol del admin las credenciales son 1144194156:admin123.
 2.	Verificar que el nombre de la base de datos que cargamos sea igual en el gestor y en la fachada.
 
-## Construido con 🛠️
+### Construido con 🛠️
 
-* [Netbeans](https://netbeans.org/) - IDE
-* [Java Swing](https://docs.oracle.com/javase/7/docs/api/javax/swing/package-summary.html) – Biblioteca Grafica
-* [PostgreSQL](https://www.postgresql.org/) – Gestor de BD
+* [Netbeans](https://netbeans.org/) - IDE.
+* [Java Swing](https://docs.oracle.com/javase/7/docs/api/javax/swing/package-summary.html) – Biblioteca Grafica.
+* [PostgreSQL](https://www.postgresql.org/) – Gestor de BD .
 
-## Contribuyendo 🖇️
-Por favor lee el [CONTRIBUTING.md](https://gist.github.com/AndresDFX/HSM) para detalles de nuestro código de conducta, y el proceso para enviarnos pull requests.
-
-## Versionado 📌
+### Versionado 📌
 Usamos [Git](https://git-scm.com/) para el versionado. Para todas las versiones disponibles, mira los [tags en este repositorio](https://github.com/AndresDFX/HSM/tags).
 
-## Autores ✒️
+### Autores ✒️
 
-* **Andres Castaño** - *Analisis y Desarrollo* - [AndresDFX](https://github.com/AndresDFX)
+* **Andres Castaño** ([AndresDFX](https://github.com/AndresDFX)) - *Analisis y Desarrollo* 
 
-También puedes mirar la lista de todos los [contribuyentes](https://github.com/AndresDFX/HSM/contributors) quíenes han participado en este proyecto. 
+### Licencia 📄
 
-## Licencia 📄
-
-Este proyecto está bajo la Licencia GNU General Public License 3.0 - mira el archivo [LICENSE.md](LICENSE.md) para detalles
+Este proyecto está bajo la Licencia GNU General Public License 3.0 - mira el archivo [LICENSE.md](LICENSE.md) para detalles.

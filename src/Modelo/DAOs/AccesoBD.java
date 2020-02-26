@@ -16,10 +16,10 @@ public class AccesoBD {
     //Declaracion de variables de conexion
     private final String driver = "org.postgresql.Driver";
     protected final String usuario = "postgres";
-    protected final String clave = "admin";
+    protected final String clave = "pokemon";
     protected final String ip = "localhost";
     protected final String puerto = "5432";
-    protected final String database = "HSM DS1";
+    protected final String database = "HSM";
     protected final String url = "jdbc:postgresql://"; 
     private Connection conexion = null;
     
