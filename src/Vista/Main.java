@@ -7,15 +7,11 @@ package Vista;
 public class Main {
     
     public static VentanaLogin VL;
-    
-    public Main(){
-           
-    }
-    
+
 //=======================================================================================================
     
     public static void main (String [] args){
-        VL = VentanaLogin.getInstancia();
+        VL  = VentanaLogin.getInstancia();
         VL.setVisible(true); 
        
     }

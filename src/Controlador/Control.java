@@ -1,4 +1,4 @@
-package Controladora;
+package Controlador;
 
 import Modelo.DAOs.RegistroDAO;
 import Modelo.DAOs.EmpleadoDAO;

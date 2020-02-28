@@ -1,6 +1,6 @@
 package Vista;
 
-import Controladora.Control;
+import Controlador.Control;
 import Modelo.Validaciones;
 import java.awt.*;
 import javax.swing.JPanel;

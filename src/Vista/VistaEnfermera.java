@@ -1,6 +1,6 @@
 package Vista;
 
-import Controladora.*;
+import Controlador.*;
 import Modelo.Validaciones;
 import java.awt.Color;
 import java.awt.Component;
@@ -284,7 +284,7 @@ public class VistaEnfermera extends javax.swing.JFrame {
         rSDateChooserFechaCita = new rojeru_san.componentes.RSDateChooser();
         rSComboMetroPaciente = new rojerusan.RSComboMetro();
         rSComboMetroMedico = new rojerusan.RSComboMetro();
-        timePanelHoraCita = new com.lavantech.gui.comp.TimePanel();
+        rSLabelHora1 = new rojeru_san.componentes.RSLabelHora();
         jPanelModificarCita = new javax.swing.JPanel();
         jLabelBuscar1 = new javax.swing.JLabel();
         jTextFieldBuscar1 = new javax.swing.JTextField();
@@ -551,7 +551,9 @@ public class VistaEnfermera extends javax.swing.JFrame {
         rSComboMetroMedico.setColorBorde(new java.awt.Color(51, 152, 219));
         rSComboMetroMedico.setColorFondo(new java.awt.Color(51, 152, 219));
         jPanelAgregarCita.add(rSComboMetroMedico, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, 180, -1));
-        jPanelAgregarCita.add(timePanelHoraCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 220, 150, 150));
+
+        rSLabelHora1.setForeground(new java.awt.Color(51, 152, 219));
+        jPanelAgregarCita.add(rSLabelHora1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, -1, -1));
 
         jPanelSliders.add(jPanelAgregarCita, "card2");
 
@@ -761,15 +763,12 @@ public class VistaEnfermera extends javax.swing.JFrame {
             codigoPacienteSolo = cedulaPaciente.split(",");
             codigoMedicoSolo = cedulaMedico.split(",");
                     
-            Calendar hora =  timePanelHoraCita.getCalendar();  
+       
             long tiempo = rSDateChooserFechaCita.getDatoFecha().getTime();
-            long tiempoReal = hora.getTimeInMillis();
             Timestamp fechaSQL = new Timestamp (tiempo);
-            Time horaReal = new Time(tiempoReal);
             fechaCita = fechaSQL.toString();
-            horaCita = horaReal+"";
-            System.out.println(horaCita);
-            System.out.println(fechaCita);
+            horaCita = rSLabelHora1.getHora();
+
             String arregloValidar1[] = {fechaCita,horaCita,cedulaPaciente,cedulaMedico};
 
             
@@ -939,10 +938,10 @@ public class VistaEnfermera extends javax.swing.JFrame {
     private rojerusan.RSComboMetro rSComboMetroMedico;
     private rojerusan.RSComboMetro rSComboMetroPaciente;
     private rojeru_san.componentes.RSDateChooser rSDateChooserFechaCita;
+    private rojeru_san.componentes.RSLabelHora rSLabelHora1;
     private rojerusan.RSPopuMenu rSPopuMenu1;
     private rojerusan.RSTableMetro rSTablaCitas;
     private efectos.Roboto roboto1;
-    private com.lavantech.gui.comp.TimePanel timePanelHoraCita;
     // End of variables declaration//GEN-END:variables
 
 }    

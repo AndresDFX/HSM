@@ -1,6 +1,6 @@
 package Vista;
 
-import Controladora.*;
+import Controlador.*;
 import Modelo.Validaciones;
 import java.awt.Color;
 import java.awt.Component;
@@ -54,7 +54,6 @@ public class VistaAdministrador extends javax.swing.JFrame {
     private final byte RESTAURACION;
     private final Image iconoVentana;
     private final File carpetaManuales;
-    private final VentanaLogin VL;
     private static VistaAdministrador INSTANCE = null;
       
 //=======================================================================================================    
@@ -75,7 +74,6 @@ public class VistaAdministrador extends javax.swing.JFrame {
         iconoVentana = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Imagenes/Logos/iconoHospital.png"));
         RESPALDO = 1;
         RESTAURACION = 2;
-        VL = VentanaLogin.getInstancia();
         
         //Implementacion de Ajustes
         ajustesGraficos();
@@ -132,11 +130,6 @@ public class VistaAdministrador extends javax.swing.JFrame {
         
         idioma = new Idioma(nombreIdioma);      
         
-        //===============VENTANA LOGIN===================================================
-        VL.jLabelIngresar.setText(idioma.getProperty("iniciar_sesion"));
-        VL.jLabelTitulo.setText(idioma.getProperty("titulo_login"));
-
-        
         //===============VENTANA ADMINISTRADOR===========================================
         
         //Modulo Menu
@@ -168,6 +161,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
         rSButtonMetroLimpiar8.setText(idioma.getProperty("limpiar"));
         rSButtonMetroGuardar5.setText(idioma.getProperty("guardar"));
         jLabelHome3.setText(idioma.getProperty("menu"));
+        rSButtonMetroFiltrar12.setText(idioma.getProperty("mostrar_todo"));
         
         //Modulo Campañas
         jLabelTituloCampaing.setText(idioma.getProperty("titulo_campanas"));
@@ -194,6 +188,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jLabelListaCampanas.setText(idioma.getProperty("lista_campanas"));
         jLabelListaPacientes.setText(idioma.getProperty("lista_pacientes"));
         jLabelHome2.setText(idioma.getProperty("menu"));
+        rSButtonMetroFiltrar11.setText(idioma.getProperty("mostrar_todo"));
         
         //Modulo Usuarios
         jLabelTituloUsuario.setText(idioma.getProperty("titulo_usuarios"));
@@ -246,6 +241,9 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jLabelJefe.setText(idioma.getProperty("cedula_jefe"));
         jLabelCargo.setText(idioma.getProperty("cargo"));
         jLabelHome.setText(idioma.getProperty("menu"));
+        rSButtonMetroFiltrar7.setText(idioma.getProperty("mostrar_todo"));
+        rSButtonMetroFiltrar8.setText(idioma.getProperty("mostrar_todo"));
+        rSButtonMetroFiltrar9.setText(idioma.getProperty("mostrar_todo"));
         
         //Modulo Herramientas
         jLabelTituloTools.setText(idioma.getProperty("titulo_herramientas"));
@@ -281,6 +279,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
         rSButtonMetroGuardar2.setText(idioma.getProperty("guardar"));        
         rSButtonMetroFiltrar2.setText(idioma.getProperty("buscar"));
         jLabelHome1.setText(idioma.getProperty("menu"));
+        rSButtonMetroFiltrar10.setText(idioma.getProperty("mostrar_todo"));
         
         //Modulo Areas
         jLabelTituloArea.setText(idioma.getProperty("titulo_areas"));
@@ -295,6 +294,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
         rSButtonMetroGuardar6.setText(idioma.getProperty("guardar"));        
         rSButtonMetroFiltrar6.setText(idioma.getProperty("buscar"));
         jLabelHome4.setText(idioma.getProperty("menu"));
+        rSButtonMetroFiltrar13.setText(idioma.getProperty("mostrar_todo"));
         
         rSComboMetroIdioma.removeAllItems();        
         String idiomas[]={
@@ -388,26 +388,6 @@ public class VistaAdministrador extends javax.swing.JFrame {
     }
     
     
-//=======================================================================================================    
-    /**
-     * Metodo para limpiar todos los componentes de un JPanel que contiene otros componentes
-     * @param panelPadre Variable que almacena ela
-     */
-    private void negrillaComponentes(JPanel panelPadre) {
-        
-        Component[] componentes = panelPadre.getComponents();
-        for(int i=0 ; i<componentes.length;i++)
-        {
-            if(componentes[i] instanceof JLabel)
-            {
-                
-                JLabel jTextFieldAux = (JLabel) componentes[i];
-                jTextFieldAux.setText("<strong>"+jTextFieldAux.getText()+"</strong>");
-            }
-
-        }
-    }
-
 //=======================================================================================================
     /**
      * Metodo que permite mostrar el PopMenu ingresando un evento del mouse
@@ -7540,39 +7520,6 @@ public class VistaAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanelHerramientasMouseExited
 
 //=======================================================================================================
-    
-        public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VistaAdministrador().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupFormato;
     private javax.swing.ButtonGroup buttonGroupTipo;

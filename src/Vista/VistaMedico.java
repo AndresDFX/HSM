@@ -1,6 +1,6 @@
 package Vista;
 
-import Controladora.*;
+import Controlador.*;
 import Modelo.Validaciones;
 import java.awt.Color;
 import java.awt.Component;
@@ -1402,9 +1402,7 @@ public class VistaMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldBuscar1FocusGained
 
 //=======================================================================================================
-    /**
-     * @param args the command line arguments
-     */
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton jButtonSlider;
